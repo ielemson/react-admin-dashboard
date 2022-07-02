@@ -2,8 +2,9 @@ import React from "react";
 import { useSelector,useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-// import moment from "moment"
-
+import moment from "moment"
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 // import TableDropdown from "../Dropdowns/TableDropdown";
 import { getUsers } from "../../features/user/usersSlice";
 import img from "../../assets/img/team-2-800x800.jpg"
@@ -11,16 +12,33 @@ import img from "../../assets/img/team-2-800x800.jpg"
 export default function CardTable({ color }) {
   const dispatch = useDispatch();
   const {users,isLoading} = useSelector((state)=>(state.users))
+  const role = JSON.parse(localStorage.getItem('role'))
 
   console.log({...users})
 
   React.useEffect(() => {
    return()=>{
     dispatch(getUsers())
+    
    }
   }, [getUsers])
   
-
+  const deleteUser = (id) => {
+    confirmAlert({
+      title: 'Confirm to submit',
+      message: 'Are you sure to do this.',
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: () => alert('Click Yes' + id)
+        },
+        {
+          label: 'No',
+          onClick: () => alert('Click No' + id)
+        }
+      ]
+    });
+  };
   
   return (
     <>
@@ -87,7 +105,7 @@ export default function CardTable({ color }) {
                       : "bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700")
                   }
                 >
-                  Location
+                  Role
                 </th>
                 <th
                   className={
@@ -163,19 +181,20 @@ export default function CardTable({ color }) {
                   {user.username}
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                  {user.contactinfo ? user.contactinfo.country : ''}
+                  {user.role}
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                   <i className="fas fa-circle text-orange-500 mr-2"></i> pending
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                   <i className="fas fa-circle text-orange-500 mr-2"></i> {user.created_at} 
+                  {/* <i className="fas fa-circle text-orange-500 mr-2"></i> {moment(user.created_at, "YYYYMMDD").fromNow()}  */}
                 </td>
                 
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                <i className="fa fa-trash text-red-600 text-md cursor-pointer"></i> {" "}
-                <Link to={'/admin/user/'+user.id}><i className="fa fa-edit text-green-500 text-md cursor-pointer ml-2"></i></Link> {" "}
-                
+                {role ==="admin" ? (<><i className="fa fa-trash text-red-600 text-md cursor-pointer" onClick={()=>deleteUser(user.id)}></i> 
+                <Link to={'/admin/user/'+user.id}><i className="fa fa-edit text-green-500 text-md cursor-pointer ml-2"></i></Link>
+                </>):(<>restricted</>)}
                 </td>
                 {/* <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-right">
                  <i className="fa fa-trash"></i>

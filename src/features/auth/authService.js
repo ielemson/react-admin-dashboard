@@ -1,11 +1,10 @@
-import axios from "axios";
-const API_URL = "https://api.oxiltravel.com/api/";
+import apiClient from "../../api/apiClient";
 import api from "../../api/api";
 // const endpoint_logout = "/logout";
 
 //Register user
 const register = async (userData) => {
-  const response = await axios.post(API_URL + "register", userData);
+  const response = await apiClient.post("/register", userData);
   if (response.data) {
     localStorage.setItem("token", JSON.stringify(response.data.user.api_token));
   }
@@ -13,24 +12,17 @@ const register = async (userData) => {
 };
 
 const login = async (userData) => {
-  const response = await axios.post(API_URL + "login", userData);
+  const response = await api.post("/login", userData);
   if (response.data.user) {
     localStorage.setItem("token", JSON.stringify(response.data.user.api_token));
+    localStorage.setItem("role", JSON.stringify(response.data.role));
   }
   return response.data.user;
 };
 
 const logout = async () => {
-  // const token = JSON.parse(localStorage.getItem("user"));
-  // const url = "https://api.topnotchengineering.com/api/user";
-  const url = "logout";
-  // const config = {
-  //   headers: {
-  //     Authorization: `Bearer ${token.api_token}`,
-  //   },
-  // };
-
-  const response = await api.get(url);
+ 
+  const response = await api.get("/logout");
   if (response.data.logout_status) {
     // localStorage.removeItem('user')
     localStorage.clear();
@@ -40,12 +32,12 @@ const logout = async () => {
 
 // Password Reset
 const resetPassword = async (email) => {
-  const response = await axios.post(API_URL + "reset-password", email);
+  const response = await apiClient.post("/reset-password", email);
   return response.data;
 };
 
 const updatePassword = async (password) => {
-  const response = await axios.post(API_URL + "update-password", password);
+  const response = await apiClient.post("/update-password", password);
   return response.data;
 };
 

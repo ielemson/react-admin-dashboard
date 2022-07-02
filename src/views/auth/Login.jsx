@@ -7,9 +7,11 @@ import { FcGoogle } from "react-icons/fc";
 import { AiFillGithub } from "react-icons/ai";
 import { loginUser, reset } from '../../features/auth/authSlice';
 import toast from 'react-hot-toast';
-export default function Login() {
-  // const userJson = JSON.parse(localStorage.getItem("user"))
-  // console.log(userJson.api_token)
+
+
+
+
+const Login = () => {
 
   const { register, handleSubmit, formState: { errors } } = useForm();
   const navigate = useNavigate();
@@ -176,3 +178,5 @@ export default function Login() {
     </>
   );
 }
+
+export default Login;

@@ -11,7 +11,7 @@ const initialState = {
 
 //Get Current User
 
-export const getUsers = createAsyncThunk("auth/users", async (user, thunkAPI) => {
+export const getUsers = createAsyncThunk("auth/users", async (thunkAPI) => {
   try {
     return await userService.getUsers();
   } catch (error) {

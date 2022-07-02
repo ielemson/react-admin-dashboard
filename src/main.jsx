@@ -5,7 +5,8 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
-import './index.css'
+import './assets/styles/index.css'
+import './assets/styles/tailwind.css'
 import App from './App'
 // import { HomeComponent } from './components';
 import {Provider} from "react-redux";
