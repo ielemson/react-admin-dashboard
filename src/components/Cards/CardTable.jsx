@@ -2,27 +2,28 @@ import React from "react";
 import { useSelector,useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import moment from "moment"
+// import moment from "moment"
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 // import TableDropdown from "../Dropdowns/TableDropdown";
 import { getUsers } from "../../features/user/usersSlice";
 import img from "../../assets/img/team-2-800x800.jpg"
-
+import api from "../../api/api";
+import toast from 'react-hot-toast';
 export default function CardTable({ color }) {
   const dispatch = useDispatch();
   const {users,isLoading} = useSelector((state)=>(state.users))
   const role = JSON.parse(localStorage.getItem('role'))
-
-  console.log({...users})
+  const notify_error = (data) => toast.error(`${data}`);
+  const notify_success = (data) => toast.success(`${data}`);
 
   React.useEffect(() => {
    return()=>{
     dispatch(getUsers())
-    
    }
   }, [getUsers])
   
+ 
   const deleteUser = (id) => {
     confirmAlert({
       title: 'Confirm to submit',
@@ -30,7 +31,20 @@ export default function CardTable({ color }) {
       buttons: [
         {
           label: 'Yes',
-          onClick: () => alert('Click Yes' + id)
+          onClick: () => {
+
+            const formData = new FormData();
+            formData.append("id",id)
+
+            api.post("/user/destroy",formData).then((res)=>{
+              if(res.data.error){
+                notify_error(res.data.error)
+              }else{
+                notify_success('User deleted')
+                dispatch(getUsers())
+              }
+            }).catch((err)=>console.log(err))
+          }
         },
         {
           label: 'No',
@@ -49,16 +63,19 @@ export default function CardTable({ color }) {
         }
       >
         <div className="rounded-t mb-0 px-4 py-3 border-0">
-          <div className="flex flex-wrap items-center">
-            <div className="relative w-full px-4 max-w-full flex-grow flex-1">
+          <div className="">
+            <div className="flex">
               <h3
                 className={
-                  "font-semibold text-lg " +
+                  "font-semibold text-lg" +
                   (color === "light" ? "text-blueGray-700" : "text-white")
                 }
               >
                 Users
+                
               </h3>
+
+              <Link to={'/admin/users/create'} class=" ml-4 cursor-pointer bg-lightBlue-500 active:bg-lightBlue-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"  >create users</Link>
             </div>
           </div>
         </div>
@@ -194,7 +211,7 @@ export default function CardTable({ color }) {
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                 {role ==="admin" ? (<><i className="fa fa-trash text-red-600 text-md cursor-pointer" onClick={()=>deleteUser(user.id)}></i> 
                 <Link to={'/admin/user/'+user.id}><i className="fa fa-edit text-green-500 text-md cursor-pointer ml-2"></i></Link>
-                </>):(<>restricted</>)}
+                </>):(<button type="button" class="inline-block px-2 py-1 cursor-not-allowed bg-red-600 text-white font-xs font-bold text-xs leading-tight uppercase rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out">Restricted</button>)}
                 </td>
                 {/* <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-right">
                  <i className="fa fa-trash"></i>

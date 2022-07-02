@@ -18,6 +18,12 @@ const updateUser = async (data) => {
   return response.data
 };
 
+const deleteUser = async (id) => {
+  const url = "/user/destroy";
+  const response = await api.post(url,id);
+  return response.data
+};
+
 const uploadPicture = async (data) => {
   const url = "/user/upload";
   const response = await api.post(url,data);
@@ -34,6 +40,7 @@ const userService = {
     getUsers,
     authCheck,
     updateUser,
+    deleteUser,
     uploadPicture,
 };
 export default userService;
