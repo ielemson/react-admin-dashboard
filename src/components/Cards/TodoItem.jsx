@@ -8,14 +8,14 @@ import moment from "moment";
 import { confirmAlert } from "react-confirm-alert";
 
 
-export default function TodoStats({
+const  TodoItem = ({
     statStatus,
     statPercentColor,
     statDescription,
     todoID,
     updatedAt,
     createdAt,
-}) {
+})=> {
     const dispatch = useDispatch()
     const notify_error = (data) => toast.error(`${data}`);
     const notify_success = (data) => toast.success(`${data}`);
@@ -123,3 +123,4 @@ export default function TodoStats({
     );
 }
 
+export default TodoItem;

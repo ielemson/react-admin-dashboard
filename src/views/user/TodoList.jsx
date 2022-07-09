@@ -13,8 +13,8 @@ const TodoList = ()=>{
   const dispatch = useDispatch();
   const {curUser} = useSelector((state)=>state.curUser)
   const {todos,isLoading} = useSelector((state)=>state.todos);
-  // const [todoLists,setTodoLists] = React.useState([])
-  // const [todosFilter,setTodosFilter] = React.useState([])
+  const [filterTodo,setFilterTodo] = React.useState('')
+
  const {register, handleSubmit,resetField, formState: {
         errors,
         isSubmitting
@@ -31,33 +31,10 @@ const TodoList = ()=>{
         }).catch((err)=>err.response.data.errors.forEach(error => notify_error(error)))
     }
     
-    const filterTodoHandler = (filter)=>{
-      // switch (statusFilter) {
-      //   case 'completed':
-      //     setTodoLists(todos.filter(todo=>todo.completed === 1))
-      //     break;
-      //   case 'uncompleted':
-      //     setTodoLists(todos.filter(todo=>todo.completed === 0))
-      //     break;
-      //   case 'all':
-      //     setTodoLists(todos)
-      //     break;
-      //   default:
-      //     setTodoLists(todos)
-      //     break;
-      // }
-      
-      api.get("/todos/"+filter).then((res)=>{
-        setTodoLists(res.data) 
-      }).catch((err)=>err.response.data.errors.forEach(error => notify_error(error)))
-    }
-
-
-    useEffect(() => {
-       dispatch(getTodos())
-      //  setTodoLists(todos)  
-    }, [])
-    
+  
+    useEffect(()=>{
+      setFilterTodo(filterTodo)
+    },[setFilterTodo])
 
 return (
 
@@ -106,12 +83,12 @@ return (
                 Filter Todo
               </label>
               <select
-              onChange={(e)=>filterTodoHandler(e.target.value.toLowerCase())}
+              onChange={(e)=>setFilterTodo(e.target.value.toLowerCase())}
                 className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
               >
                 <option value="all">all</option>
+                <option value="incomplete">incomplete</option>
                 <option value="completed">completed</option>
-                <option value="uncompleted">uncompleted</option>
               </select>
             </div>
           </div>
@@ -132,11 +109,8 @@ return (
             {/* Card stats */}
 
               {
-              //  isLoading ? (<>Loading</>) ? todos.length ? (<TodoCard todos={todos}/>):(<CardAlert title="Notification!" notification={'You do not have any todos yet'} bgColor="bg-red-400"/>)
-             isLoading ? (<CardLoading/>) : todos.length > 0 ? (<TodoCard todos={todos}/>):(<CardAlert title="Notification!" notification={'You do not have any todos yet'} bgColor="bg-red-400"/>)
-             }
-             
-           
+             isLoading === true ? (<CardLoading/>) : todos.length > 0 ? (<TodoCard todos={todos} filterTodo={filterTodo}/>):(<CardAlert title="Notification!" notification={'You do not have any todos yet'} bgColor="bg-red-400"/>)
+             }          
   {/* Todo Card */}
  
   </>

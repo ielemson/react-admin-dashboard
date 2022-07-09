@@ -7,7 +7,7 @@ export default function CardSettings({user,getUser}) {
   // const dispatch  = useDispatch()
   const { register, setValue,handleSubmit, formState: { errors } } = useForm();
   const contact = {...user.contactinfo}
- 
+
 
   const onFormSubmit = async(data) =>{
 
@@ -31,12 +31,29 @@ export default function CardSettings({user,getUser}) {
       <div className="rounded-t bg-white mb-0 px-6 py-6">
         <div className="text-center flex justify-between">
           <h6 className="text-blueGray-700 text-xl font-bold">My account</h6>
-          <button
+          {/* <button
             className="bg-lightBlue-500 text-white active:bg-lightBlue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
             type="button"
           >
             Settings
-          </button>
+          </button> */}
+
+          <div class="fiex justify-center">
+        <div class="form-check form-switch">
+      {
+        user.active === 1 ?
+         (
+         <>  <input class="form-check-input appearance-none rounded-full p-1 mr-2 talign-top bg-white focus:outline-none cursor-pointer shadow-sm" type="checkbox" role="switch" checked />
+          <label class="form-check-label inline-block text-gray-800" for="user status"><b className="text-green-500">active</b></label></>)
+        :
+        (
+        <>
+        <input class="form-check-input appearance-none rounded-full p-1 mr-2 talign-top bg-white focus:outline-none cursor-pointer shadow-sm" type="checkbox" role="switch" />
+        <label class="form-check-label inline-block text-gray-800" for="user status"><b className="text-red-500">active</b></label></>)
+      }
+        </div>
+        </div>
+
         </div>
       </div>
       <div className="flex-auto px-4 lg:px-10 py-10 pt-0">

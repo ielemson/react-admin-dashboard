@@ -192,7 +192,7 @@ export default function CardTable({ color }) {
                 </th>
                 
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                 {user.email}
+                 {role === "admin" ? user.email : '*****'}
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                   {user.username}
@@ -201,7 +201,10 @@ export default function CardTable({ color }) {
                   {user.role}
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                  <i className="fas fa-circle text-orange-500 mr-2"></i> pending
+                  {
+                    user.active === 1 ? (<>
+                    <i className="fas fa-circle text-green-500 mr-2"></i> active</> ):(<><i className="fas fa-circle text-orange-500 mr-2"></i> pending</> )
+                  }
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                   <i className="fas fa-circle text-orange-500 mr-2"></i> {user.created_at} 

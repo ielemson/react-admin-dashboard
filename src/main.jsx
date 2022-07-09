@@ -105,10 +105,20 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       
          <Route path="*" element={<NotFound/>} />
     </Routes>
-    <Toaster 
+    {/* <Toaster 
      position="top-right"
      reverseOrder={false}
-    />
+    /> */}
+
+<Toaster
+        position="bottom-right"
+        toastOptions={{
+          style: {
+            fontSize: '1rem',
+            fontWeight:'bold'
+          },
+        }}
+      />
   </Provider>
 
   </Router>

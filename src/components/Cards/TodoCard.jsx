@@ -1,9 +1,30 @@
+import React from "react";
+import TodoItem from "../Cards/TodoItem";
 
-import moment from "moment";
-import TodoStats from "../Cards/TodoStats";
+export default function HeaderStats({todos,filterTodo}) {
+ const [todoLists, setTodoLists] = React.useState([])
 
-export default function HeaderStats({todos,filterTodoHandler}) {
+ const filterTodoHandler = ()=>{
+      switch (filterTodo) {
+        case 'completed':
+          setTodoLists(todos.filter(todo=>todo.completed === 1))
+          break;
+        case 'incomplete':
+          setTodoLists(todos.filter(todo=>todo.completed === 0))
+          break;
+        default:
+          setTodoLists(todos)
+          break;
+      }
+     
+    }
 
+
+    React.useEffect(() => {  
+      filterTodoHandler()
+    }, [filterTodo])
+
+  
   return (
     <>
       {/* Header */}
@@ -13,9 +34,9 @@ export default function HeaderStats({todos,filterTodoHandler}) {
             {/* Card stats */}
             <div className="flex flex-wrap">
             {
-                todos.map((todo,key)=>(
+                todoLists.map((todo,key)=>(
                     <div className="w-full lg:w-6/12 p-3 px-4" key={key}>
-                    <TodoStats
+                    <TodoItem
                       // statTitle={todo.todo}
                       statPercentColor={todo.completed === 1 ? "font-bold text-emerald-500" : "font-bold text-red-500"}
                       statDescription={todo.todo}
@@ -23,7 +44,7 @@ export default function HeaderStats({todos,filterTodoHandler}) {
                       todoID = {todo.id}
                       createdAt={todo.created_at}
                       updatedAt={todo.updated_at}
-                      filterTodoHandler={filterTodoHandler}
+                      // filterTodoHandler={filterTodoHandler}
                     />
                   </div>
                 ))
