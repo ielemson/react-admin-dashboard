@@ -1,10 +1,13 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 // components
 
 import CardStats from "../Cards/CardStats";
 
 export default function HeaderStats() {
+  const {users} = useSelector((state)=>state.users)
+  const {todos} = useSelector((state)=>state.todos)
   return (
     <>
       {/* Header */}
@@ -15,8 +18,8 @@ export default function HeaderStats() {
             <div className="flex flex-wrap">
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
-                  statSubtitle="TRAFFIC"
-                  statTitle="350,897"
+                  statSubtitle="My Todos"
+                  statTitle={todos.length}
                   statArrow="up"
                   statPercent="3.48"
                   statPercentColor="text-emerald-500"
@@ -28,7 +31,7 @@ export default function HeaderStats() {
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
                   statSubtitle="NEW USERS"
-                  statTitle="2,356"
+                  statTitle={users.length}
                   statArrow="down"
                   statPercent="3.48"
                   statPercentColor="text-red-500"

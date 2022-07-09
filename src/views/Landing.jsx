@@ -1,16 +1,24 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import img from "../assets/img/team-1-800x800.jpg"
-import img1 from "../assets/img/team-2-800x800.jpg"
-import img2 from "../assets/img/team-3-800x800.jpg"
-import img3 from "../assets/img/team-4-470x470.png"
-
+// import img from "../assets/img/team-1-800x800.jpg"
+// import img1 from "../assets/img/team-2-800x800.jpg"
+// import img2 from "../assets/img/team-3-800x800.jpg"
+// import img3 from "../assets/img/team-4-470x470.png"
 // components
-
+// useSelector
 import Navbar from "../components/Navbars/AuthNavbar";
 import Footer from "../components/Footers/Footer";
+import { authCheck } from "../features/user/authCheckSlice";
+import { useSelector,useDispatch } from "react-redux";
+
 
 export default function Landing() {
+const dispatch = useDispatch();
+const {check} = useSelector((state)=>state.check)
+console.log(check)
+React.useEffect(()=>{
+  dispatch(authCheck())
+},[])
   return (
     <>
       <Navbar transparent />

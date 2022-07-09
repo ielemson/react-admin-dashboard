@@ -1,23 +1,27 @@
 /*eslint-disable*/
 import React from "react";
-import {Link, useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {useSelector, useDispatch} from 'react-redux';
-import {logoutUser, reset} from '../../features/auth/authSlice';
-import toast from 'react-hot-toast';
+import {logoutUser} from '../../features/auth/authSlice';
+// import toast from 'react-hot-toast';
 import NotificationDropdown from "../Dropdowns/NotificationDropdown";
 import UserDropdown from "../Dropdowns/UserDropdown";
-import { authCheck } from "../../features/user/authCheckSlice";
-import { useEffect } from "react";
+import api from "../../api/api";
+import { getCurUSer } from "../../features/user/curUserSlice";
+// import { authCheck } from "../../features/user/authCheckSlice";
+// import { useEffect } from "react";
 
 export default function Sidebar() {
     const [collapseShow, setCollapseShow] = React.useState("hidden");
+    // const [userId,setUserId] = React.useState('');
     const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const notify_error = (data) => toast.error(`${data}`);
-    const {isError, message} = useSelector((state) => state.auth)
+    // const navigate = useNavigate();
+    // const notify_error = (data) => toast.error(`${data}`);
+    // const {isError, message} = useSelector((state) => state.auth)
     const {check} = useSelector((state)=>state.check)
-   
-    // const {user} = useSelector((state) => state.user)
+    // const {curUser} = useSelector((state)=>state.curUser)
+//    console.log(curUser.user.id)
+
 
     const Logout = () => {
         dispatch(logoutUser());
@@ -25,6 +29,13 @@ export default function Sidebar() {
         window.location.href="/"
         }
    
+// React.useEffect(()=>{
+//     api.get('/user').then((res)=>{
+//         setUserId(res.data.id)
+//         dispatch(getCurUSer())
+//     })
+// },[]);
+
 
     return (
         <>
@@ -90,13 +101,13 @@ export default function Sidebar() {
                             <li className="items-center">
                                 <Link className={
                                         "text-xs uppercase py-3 font-bold block " + (
-                                        window.location.href.indexOf("/admin/dashboard") !== -1 ? "text-lightBlue-500 hover:text-lightBlue-600" : "text-gray-700 hover:text-gray-500"
+                                        window.location.href.indexOf("/user/dashboard") !== -1 ? "text-lightBlue-500 hover:text-lightBlue-600" : "text-gray-700 hover:text-gray-500"
                                     )
                                     }
-                                    to="/admin/dashboard">
+                                    to="/user/dashboard">
                                     <i className={
                                         "fas fa-tv mr-2 text-sm " + (
-                                        window.location.href.indexOf("/admin/dashboard") !== -1 ? "opacity-75" : "text-gray-300"
+                                        window.location.href.indexOf("/user/dashboard") !== -1 ? "opacity-75" : "text-gray-300"
                                     )
                                     }></i>
                                     {" "}
@@ -107,13 +118,13 @@ export default function Sidebar() {
                             <li className="items-center">
                                 <Link className={
                                         "text-xs uppercase py-3 font-bold block " + (
-                                        window.location.href.indexOf("/admin/settings") !== -1 ? "text-lightBlue-500 hover:text-lightBlue-600" : "text-gray-700 hover:text-gray-500"
+                                        window.location.href.indexOf("/user/settings") !== -1 ? "text-lightBlue-500 hover:text-lightBlue-600" : "text-gray-700 hover:text-gray-500"
                                     )
                                     }
-                                    to="/admin/settings">
+                                    to="/user/settings">
                                     <i className={
                                         "fas fa-tools mr-2 text-sm " + (
-                                        window.location.href.indexOf("/admin/settings") !== -1 ? "opacity-75" : "text-gray-300"
+                                        window.location.href.indexOf("/user/settings") !== -1 ? "opacity-75" : "text-gray-300"
                                     )
                                     }></i>
                                     {" "}
@@ -141,13 +152,13 @@ export default function Sidebar() {
                             <li className="items-center">
                                 <Link className={
                                         "text-xs uppercase py-3 font-bold block " + (
-                                        window.location.href.indexOf("/admin/profile") !== -1 ? "text-lightBlue-500 hover:text-lightBlue-600" : "text-gray-700 hover:text-gray-500"
+                                        window.location.href.indexOf("/user/profile") !== -1 ? "text-lightBlue-500 hover:text-lightBlue-600" : "text-gray-700 hover:text-gray-500"
                                     )
                                     }
-                                    to="/admin/profile">
+                                    to="/user/profile">
                                     <i className={
                                         "fas fa-user mr-2 text-sm " + (
-                                        window.location.href.indexOf("/admin/profile") !== -1 ? "opacity-75" : "text-gray-300"
+                                        window.location.href.indexOf("/user/profile") !== -1 ? "opacity-75" : "text-gray-300"
                                     )
                                     }></i>
                                     {" "}
@@ -158,30 +169,69 @@ export default function Sidebar() {
                             <li className="items-center">
                                 <Link className={
                                         "text-xs uppercase py-3 font-bold block " + (
-                                        window.location.href.indexOf("/admin/profile") !== -1 ? "text-lightBlue-500 hover:text-lightBlue-600" : "text-gray-700 hover:text-gray-500"
+                                        window.location.href.indexOf('user/todo') !== -1 ? "text-lightBlue-500 hover:text-lightBlue-600" : "text-gray-700 hover:text-gray-500"
                                     )
                                     }
-                                    to="/admin/profile">
+                                    to={`/user/todo`}>
                                     <i className={
                                         "fas fa-tasks mr-2 text-sm " + (
-                                        window.location.href.indexOf("/admin/profile") !== -1 ? "opacity-75" : "text-gray-300"
+                                        window.location.href.indexOf(`user/todo`) !== -1 ? "opacity-75" : "text-gray-300"
                                     )
                                     }></i>
                                     {" "}
                                     Todo List
                                 </Link>
                             </li>
+                            <li className="items-center">
+                                <Link className={
+                                        "text-xs uppercase py-3 font-bold block " + (
+                                        window.location.href.indexOf('user/file') !== -1 ? "text-lightBlue-500 hover:text-lightBlue-600" : "text-gray-700 hover:text-gray-500"
+                                    )
+                                    }
+                                    to={`/user/todo`}>
+                                    <i className={
+                                        "fas fa-tasks mr-2 text-sm " + (
+                                        window.location.href.indexOf(`user/file`) !== -1 ? "opacity-75" : "text-gray-300"
+                                    )
+                                    }></i>
+                                    {" "}
+                                    Send File
+                                </Link>
+                            </li>
+                            <li className="items-center">
+                                <Link className={
+                                        "text-xs uppercase py-3 font-bold block " + (
+                                        window.location.href.indexOf('user/quiz/settings') !== -1 ? "text-lightBlue-500 hover:text-lightBlue-600" : "text-gray-700 hover:text-gray-500"
+                                    )
+                                    }
+                                    to={`/user/quiz/settings`}>
+                                    <i className={
+                                        "fas fa-tasks mr-2 text-sm " + (
+                                        window.location.href.indexOf(`user/quiz/settings`) !== -1 ? "opacity-75" : "text-gray-300"
+                                    )
+                                    }></i>
+                                    {" "}
+                                    Take Quiz
+                                </Link>
+                            </li>
+
+                                    {/* //    <div className="p-5 flex space-x-3">
+                                    //     <div className="w-2 h-2 bg-gray-800 rounded-full animate-bounce"></div>
+                                    //     <div className="w-2 h-2 bg-gray-800 rounded-full animate-bounce"></div>
+                                    //     <div className="w-2 h-2 bg-gray-800 rounded-full animate-bounce"></div>
+                                    //     </div>
+                                            */}
 
                             {/* <li className="items-center">
                                 <Link className={
                                         "text-xs uppercase py-3 font-bold block " + (
-                                        window.location.href.indexOf("/admin/maps") !== -1 ? "text-lightBlue-500 hover:text-lightBlue-600" : "text-gray-700 hover:text-gray-500"
+                                        window.location.href.indexOf("/user/maps") !== -1 ? "text-lightBlue-500 hover:text-lightBlue-600" : "text-gray-700 hover:text-gray-500"
                                     )
                                     }
-                                    to="/admin/maps">
+                                    to="/user/maps">
                                     <i className={
                                         "fas fa-map-marked mr-2 text-sm " + (
-                                        window.location.href.indexOf("/admin/maps") !== -1 ? "opacity-75" : "text-gray-300"
+                                        window.location.href.indexOf("/user/maps") !== -1 ? "opacity-75" : "text-gray-300"
                                     )
                                     }></i>
                                     {" "}

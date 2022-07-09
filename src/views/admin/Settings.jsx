@@ -7,7 +7,6 @@ import CardProfile from "../../components/Cards/CardProfile";
 
 export default function Settings() {
 
-  
   return (
     <>
       <div className="flex flex-wrap">

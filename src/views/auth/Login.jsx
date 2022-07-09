@@ -43,7 +43,7 @@ const Login = () => {
 
       if(isSuccess || user ){
         // navigate('/admin/dashboard')
-        window.location.href="/admin/dashboard"
+        window.location.href="/user/dashboard"
       }
 
       dispatch(reset())

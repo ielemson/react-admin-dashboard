@@ -1,7 +1,6 @@
 import React from 'react';
 import CardTable from '../../components/Cards/CardTable';
 
-
 const Users = () => {
     return (
       <>

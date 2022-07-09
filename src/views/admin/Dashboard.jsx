@@ -6,7 +6,7 @@ import CardBarChart from "../../components/Cards/CardBarChart";
 import CardPageVisits from "../../components/Cards/CardPageVisits";
 import CardSocialTraffic from "../../components/Cards/CardSocialTraffic";
 
-export default function Dashboard() {
+const Dashboard = ()=> {
   // const user = JSON.parse(localStorage.getItem('user'))
   // console.log(user.api_token)
   return (
@@ -30,3 +30,4 @@ export default function Dashboard() {
     </>
   );
 }
+export default Dashboard;

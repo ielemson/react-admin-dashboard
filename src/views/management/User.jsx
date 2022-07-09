@@ -1,7 +1,5 @@
 import React from "react";
-
 // components
-
 import CardSettings from "./components/Cards/CardSettings";
 import CardProfile from "./components/Cards/CardProfile";
 import { useParams } from "react-router-dom";

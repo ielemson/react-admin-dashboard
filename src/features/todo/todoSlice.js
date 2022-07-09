@@ -1,8 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import userService from "./userService";
+import todoService from "./todoService";
 
 const initialState = {
-  user:      {},
+  todos:      [],
   isError:   false,
   isSuccess: false,
   isLoading: false,
@@ -11,9 +11,9 @@ const initialState = {
 
 //Get Current User
 
-export const getUser = createAsyncThunk("auth/user", async (thunkAPI) => {
+export const getTodos = createAsyncThunk("user/todos", async (thunkAPI) => {
   try {
-    return await userService.getUser();
+    return await todoService.getTodos();
   } catch (error) {
     const message =
       error.response.data.errors ||
@@ -26,8 +26,8 @@ export const getUser = createAsyncThunk("auth/user", async (thunkAPI) => {
 });
 
 
-export const userSlice = createSlice({
-  name: "user",
+export const todoSlice = createSlice({
+  name: "todos",
   initialState,
   reducers: {
     reset: (state) => {
@@ -40,22 +40,22 @@ export const userSlice = createSlice({
 
   extraReducers: (builder) => {
     builder
-      .addCase(getUser.pending, (state) => {
+      .addCase(getTodos.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(getUser.fulfilled, (state, action) => {
+      .addCase(getTodos.fulfilled, (state, action) => {
         (state.isLoading = false),
           (state.isSuccess = true),
-          (state.user = action.payload);
+          (state.todos = action.payload);
       })
-      .addCase(getUser.rejected, (state, action) => {
+      .addCase(getTodos.rejected, (state, action) => {
         (state.isLoading = false),
           (state.isError = true),
           (state.message = action.payload),
-          (state.user = {});
+          (state.todos = []);
       })
 
   },
 });
-export const { reset } = userSlice.actions;
-export default userSlice.reducer;
+export const { reset } = todoSlice.actions;
+export default todoSlice.reducer;

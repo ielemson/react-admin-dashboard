@@ -28,7 +28,10 @@ import User from "./views/management/User"
 import Profile from "./views/Profile"
 import ProtectedRoute from './utils/ProtectedRoute ';
 import CreateUser from './views/management/CreateUser';
-
+import TodoList from './views/user/TodoList';
+import QuizSettings from "./views/Quiz/QuizSettings"
+import FinalQuiz from "./views/Quiz/FinalScreen";
+import Questions from "./views/Quiz/Questions";
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
 
@@ -56,7 +59,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         {/* Authenticated routes starts here :::::::::::::::::::::::::::::::::::::::::::::::::::::: */}
         <Route element={<AdminApp/>}>
      
-        <Route path='/admin/dashboard' element={
+        <Route path='/user/dashboard' element={
           <ProtectedRoute><Dashboard/></ProtectedRoute>
         }/>
 
@@ -69,7 +72,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <ProtectedRoute> <CreateUser/> </ProtectedRoute>
         }/>
      
-        <Route path='/admin/settings' element={
+        <Route path='/user/settings' element={
           <ProtectedRoute><Settings/></ProtectedRoute>
         }/>
 
@@ -80,10 +83,24 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path='admin/user/:id' element={
           <ProtectedRoute><User/></ProtectedRoute>
         }/>
+        <Route path='user/todo' element={
+          <ProtectedRoute><TodoList/></ProtectedRoute>
+        }/>
         
+        {/* Quiz App  Starts*/}
+        <Route path='/user/quiz/score' element={
+          <ProtectedRoute><FinalQuiz/></ProtectedRoute>
+        }/>
+        <Route path='/user/quiz/questions' element={
+          <ProtectedRoute><Questions/></ProtectedRoute>
+        }/>
+        <Route path='/user/quiz/settings' element={
+          <ProtectedRoute><QuizSettings/></ProtectedRoute>
+        }/>
+        {/* Quiz App  Ends*/}
         </Route>
 
-        <Route path='admin/profile' element={<ProtectedRoute><Profile/></ProtectedRoute> }/>
+        <Route path='user/profile' element={<ProtectedRoute><Profile/></ProtectedRoute> }/>
         {/* Authenticated routes ends here ::::::::::::::::::::::::::::::::::::::::::::*/}
       
          <Route path="*" element={<NotFound/>} />

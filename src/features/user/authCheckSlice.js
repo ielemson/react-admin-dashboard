@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import userService from "./userService";
 
 const initialState = {
-  check:      0,
+  check:      '',
   isError:   false,
   isSuccess: false,
   isLoading: false,
@@ -11,7 +11,7 @@ const initialState = {
 
 //Get Current User
 
-export const authCheck = createAsyncThunk("auth/user", async (thunkAPI) => {
+export const authCheck = createAsyncThunk("/user/check", async (thunkAPI) => {
   try {
     return await userService.authCheck();
   } catch (error) {

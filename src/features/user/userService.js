@@ -6,6 +6,12 @@ const getUser = async () => {
   return response.data
 };
 
+const getCurUSer = async () => {
+  const url = "/user/current";
+  const response = await api.get(url);
+  return response.data
+};
+
 const getUsers = async () => {
   const url = "/users";
   const response = await api.get(url);
@@ -38,6 +44,7 @@ const authCheck = async () => {
 const userService = {
     getUser,
     getUsers,
+    getCurUSer,
     authCheck,
     updateUser,
     deleteUser,
