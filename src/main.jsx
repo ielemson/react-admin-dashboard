@@ -111,10 +111,10 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     /> */}
 
 <Toaster
-        position="bottom-right"
+        position="top-right"
         toastOptions={{
           style: {
-            fontSize: '1rem',
+            fontSize: '0.7rem',
             fontWeight:'bold'
           },
         }}

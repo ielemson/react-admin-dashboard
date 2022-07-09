@@ -3,6 +3,7 @@ import todoService from "./todoService";
 
 const initialState = {
   todos:      [],
+  todoList: [],
   isError:   false,
   isSuccess: false,
   isLoading: false,
@@ -14,6 +15,20 @@ const initialState = {
 export const getTodos = createAsyncThunk("user/todos", async (thunkAPI) => {
   try {
     return await todoService.getTodos();
+  } catch (error) {
+    const message =
+      error.response.data.errors ||
+      error.response.data ||
+      error.response.status ||
+      error.response||
+      error.response.error;
+    return thunkAPI.rejectWithValue(message);
+  }
+});
+
+export const getAllTodos = createAsyncThunk("all/todos", async (thunkAPI) => {
+  try {
+    return await todoService.getAllTodos();
   } catch (error) {
     const message =
       error.response.data.errors ||
@@ -53,6 +68,21 @@ export const todoSlice = createSlice({
           (state.isError = true),
           (state.message = action.payload),
           (state.todos = []);
+      })
+      // all Todos
+      .addCase(getAllTodos.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getAllTodos.fulfilled, (state, action) => {
+        (state.isLoading = false),
+          (state.isSuccess = true),
+          (state.todoList = action.payload);
+      })
+      .addCase(getAllTodos.rejected, (state, action) => {
+        (state.isLoading = false),
+          (state.isError = true),
+          (state.message = action.payload),
+          (state.todoList = []);
       })
 
   },

@@ -1,13 +1,17 @@
 import React from "react";
-import { useSelector } from "react-redux";
-
+import { useSelector,useDispatch } from "react-redux";
+import { getAllTodos } from "../../features/todo/todoSlice";
 // components
 
 import CardStats from "../Cards/CardStats";
 
 export default function HeaderStats() {
+  const dispatch = useDispatch();
   const {users} = useSelector((state)=>state.users)
-  const {todos} = useSelector((state)=>state.todos)
+  const {todos,todoList} = useSelector((state)=>state.todos)
+
+  React.useEffect(()=>{dispatch(getAllTodos
+    ())},[])
   return (
     <>
       {/* Header */}
@@ -42,8 +46,8 @@ export default function HeaderStats() {
               </div>
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
-                  statSubtitle="SALES"
-                  statTitle="924"
+                  statSubtitle="Todos"
+                  statTitle={todoList.length}
                   statArrow="down"
                   statPercent="1.10"
                   statPercentColor="text-orange-500"

@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import {useSelector,useDispatch} from 'react-redux';
 import TodoCard from "../../components/Cards/TodoCard"
 import toast from "react-hot-toast";
-import { getTodos } from "../../features/todo/todoSlice";
+import { getTodos} from "../../features/todo/todoSlice";
 import api from "../../api/api";
 import CardLoading from "../../components/Cards/CardLoading";
 import CardAlert from "../../components/Cards/CardAlert";
@@ -14,7 +14,6 @@ const TodoList = ()=>{
   const {curUser} = useSelector((state)=>state.curUser)
   const {todos,isLoading} = useSelector((state)=>state.todos);
   const [filterTodo,setFilterTodo] = React.useState('')
-
  const {register, handleSubmit,resetField, formState: {
         errors,
         isSubmitting

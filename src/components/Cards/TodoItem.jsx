@@ -45,14 +45,14 @@ const  TodoItem = ({
 
     const completeTodo = (id) => { // const formData = new formData();
         api.get('/todo/complete/' + id).then((res) => {
-            res.data.status == true ? notify_success('todo completed') : notify_error('error occured')
+            res.data.status == true ? notify_success('todo set to complete') : notify_error('error occured')
             dispatch(getTodos())
         })
     }
 
     const undoTodo = (id) =>{
         api.get('/todo/undo/' + id).then((res) => {
-            res.data.status == true ? notify_success('todo undone') : notify_error('error occured')
+            res.data.status == true ? notify_success('todo set to incomplete') : notify_error('error occured')
             dispatch(getTodos())
         })
     }

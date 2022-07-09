@@ -6,7 +6,14 @@ const getTodos = async () => {
   return response.data
 };
 
+const getAllTodos = async () => {
+  const url = "/todos/all";
+  const response = await api.get(url);
+  return response.data
+};
+
 const todoService = {
-   getTodos
+   getTodos,
+   getAllTodos,
 };
 export default todoService;
