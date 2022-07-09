@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import userService from "./userService";
 
 const initialState = {
-  check:      '',
+  check:     '',
   isError:   false,
   isSuccess: false,
   isLoading: false,
@@ -27,7 +27,7 @@ export const authCheck = createAsyncThunk("/user/check", async (thunkAPI) => {
 
 
 export const authCheckSlice = createSlice({
-  name: "user",
+  name: "check",
   initialState,
   reducers: {
     reset: (state) => {
@@ -52,7 +52,7 @@ export const authCheckSlice = createSlice({
         (state.isLoading = false),
           (state.isError = true),
           (state.message = action.payload),
-          (state.check = 0);
+          (state.check = false);
       })
 
   },

@@ -1,23 +1,21 @@
 /*eslint-disable*/
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useDispatch,useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 // components
 import PagesDropdown from "../Dropdowns/PagesDropdown";
-import { logoutUser } from "../../features/auth/authSlice";
+// import { logoutUser } from "../../features/auth/authSlice";
 
-export default function Navbar(props) {
+export default function Navbar() {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
   // const {user} = useSelector((state)=>state.user)
-  const {check} = useSelector((state)=>state.check)
-  const dispatch = useDispatch();
-  const navigate = useNavigate()
-  console.log("from auth navbar "+ check)
+  // const {check} = useSelector((state)=>state.check)
 
-  const Logout = ()=>{
-    dispatch(logoutUser());
-    window.location.href="/"
-  }
+
+  // const Logout = ()=>{
+  //   // dispatch(logoutUser());
+  //   window.location.href="/"
+  // }
 
 
   return (
@@ -84,7 +82,7 @@ export default function Navbar(props) {
                 </Link>
               </li>  */}
               
-             {check !== 0 &&  
+             {/* {check !== 0 &&  
              
              <li className="flex items-center">
                 <button
@@ -94,7 +92,7 @@ export default function Navbar(props) {
                 >
                   <i className="fas fa-arrow-alt-circle-down"></i> Logout
                 </button>
-              </li>}
+              </li>} */}
               
             
             </ul>

@@ -151,7 +151,7 @@ export const authSlice = createSlice({
         state.user = null;
         state.isLoading = false;
       })
-      .addCase(logoutUser.rejected, (state,payload) => {
+      .addCase(logoutUser.rejected, (state,action) => {
         state.user = null;
         state.isLoading = false;
         state.isError = true;

@@ -24,10 +24,9 @@ const logout = async () => {
  
   const response = await api.get("/logout");
   if (response.data.logout_status) {
-    // localStorage.removeItem('user')
     localStorage.clear();
   }
-  // return response.data
+
 };
 
 // Password Reset

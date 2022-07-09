@@ -35,10 +35,13 @@ const uploadPicture = async (data) => {
   const response = await api.post(url,data);
   return response.data
 };
+// check if token is valid
 const authCheck = async () => {
-  const url = "/check";
+  const token = JSON.parse(localStorage.getItem('token'))
+  token === null ? token= '': token
+  const url = "/check_token/"+token;
   const response = await api.get(url);
-  return response.data
+  return response.data.isAuthenticated
 };
 
 const userService = {

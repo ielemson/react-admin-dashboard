@@ -17,11 +17,6 @@ export default function CardTable({ color }) {
   const notify_error = (data) => toast.error(`${data}`);
   const notify_success = (data) => toast.success(`${data}`);
 
-  React.useEffect(() => {
-   return()=>{
-    dispatch(getUsers())
-   }
-  }, [getUsers])
   
  
   const deleteUser = (id) => {

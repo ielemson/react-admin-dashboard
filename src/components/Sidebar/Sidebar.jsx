@@ -1,42 +1,24 @@
 /*eslint-disable*/
 import React from "react";
-import {Link} from "react-router-dom";
+import {Link,useNavigate} from "react-router-dom";
 import {useSelector, useDispatch} from 'react-redux';
 import {logoutUser} from '../../features/auth/authSlice';
-// import toast from 'react-hot-toast';
 import NotificationDropdown from "../Dropdowns/NotificationDropdown";
 import UserDropdown from "../Dropdowns/UserDropdown";
-import api from "../../api/api";
-import { getCurUSer } from "../../features/user/curUserSlice";
-// import { authCheck } from "../../features/user/authCheckSlice";
-// import { useEffect } from "react";
+
 
 export default function Sidebar() {
+
     const [collapseShow, setCollapseShow] = React.useState("hidden");
-    // const [userId,setUserId] = React.useState('');
     const dispatch = useDispatch();
-    // const navigate = useNavigate();
-    // const notify_error = (data) => toast.error(`${data}`);
-    // const {isError, message} = useSelector((state) => state.auth)
-    const {check} = useSelector((state)=>state.check)
-    // const {curUser} = useSelector((state)=>state.curUser)
-//    console.log(curUser.user.id)
+    const navigate = useNavigate()
 
 
     const Logout = () => {
         dispatch(logoutUser());
-        // navigate('/')
-        window.location.href="/"
+        navigate('/')
         }
    
-// React.useEffect(()=>{
-//     api.get('/user').then((res)=>{
-//         setUserId(res.data.id)
-//         dispatch(getCurUSer())
-//     })
-// },[]);
-
-
     return (
         <>
             <nav className="md:left-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-nowrap md:overflow-hidden shadow-xl bg-white flex flex-wrap items-center justify-between relative md:w-64 z-10 py-4 px-6">
@@ -93,7 +75,7 @@ export default function Sidebar() {
                         {/* Divider */}
                         <hr className="my-4 md:min-w-full"/> {/* Heading */}
                         <h6 className="md:min-w-full text-gray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
-                            Admin Layout Pages
+                            Admin Menu
                         </h6>
                         {/* Navigation */}
 
@@ -149,7 +131,27 @@ export default function Sidebar() {
                                 </Link>
                             </li>
 
-                            <li className="items-center">
+                               {/*
+                               Animate loader
+                               <div className="p-5 flex space-x-3">
+                                   <div className="w-2 h-2 bg-gray-800 rounded-full animate-bounce"></div>
+                                        <div className="w-2 h-2 bg-gray-800 rounded-full animate-bounce"></div>
+                                    <div className="w-2 h-2 bg-gray-800 rounded-full animate-bounce"></div>
+                                </div> */}
+                                            
+                        
+                        </ul>
+
+                        {/* Divider */}
+                        <hr className="my-4 md:min-w-full"/> {/* Heading */}
+                        <h6 className="md:min-w-full text-gray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
+                           User Menu
+                        </h6>
+                        {/* Navigation */}
+
+                        {
+                        <ul className="md:flex-col md:min-w-full flex flex-col list-none md:mb-4 cursor-pointer font-bold">
+                          <li className="items-center">
                                 <Link className={
                                         "text-xs uppercase py-3 font-bold block " + (
                                         window.location.href.indexOf("/user/profile") !== -1 ? "text-lightBlue-500 hover:text-lightBlue-600" : "text-gray-700 hover:text-gray-500"
@@ -165,8 +167,7 @@ export default function Sidebar() {
                                     Profile
                                 </Link>
                             </li>
-
-                            <li className="items-center">
+                        <li className="items-center">
                                 <Link className={
                                         "text-xs uppercase py-3 font-bold block " + (
                                         window.location.href.indexOf('user/todo') !== -1 ? "text-lightBlue-500 hover:text-lightBlue-600" : "text-gray-700 hover:text-gray-500"
@@ -214,41 +215,18 @@ export default function Sidebar() {
                                     Take Quiz
                                 </Link>
                             </li>
-
-                                    {/* //    <div className="p-5 flex space-x-3">
-                                    //     <div className="w-2 h-2 bg-gray-800 rounded-full animate-bounce"></div>
-                                    //     <div className="w-2 h-2 bg-gray-800 rounded-full animate-bounce"></div>
-                                    //     <div className="w-2 h-2 bg-gray-800 rounded-full animate-bounce"></div>
-                                    //     </div>
-                                            */}
-
-                            {/* <li className="items-center">
-                                <Link className={
-                                        "text-xs uppercase py-3 font-bold block " + (
-                                        window.location.href.indexOf("/user/maps") !== -1 ? "text-lightBlue-500 hover:text-lightBlue-600" : "text-gray-700 hover:text-gray-500"
-                                    )
-                                    }
-                                    to="/user/maps">
-                                    <i className={
-                                        "fas fa-map-marked mr-2 text-sm " + (
-                                        window.location.href.indexOf("/user/maps") !== -1 ? "opacity-75" : "text-gray-300"
-                                    )
-                                    }></i>
-                                    {" "}
-                                    Maps
-                                </Link>
-                            </li> */}
-                        </ul>
-
+ 
+                            </ul>
+                           }
                         {/* Divider */}
                         <hr className="my-4 md:min-w-full"/> {/* Heading */}
                         <h6 className="md:min-w-full text-gray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
-                            Auth Layout Pages
+                        Auth Menu
                         </h6>
                         {/* Navigation */}
 
-                        {
-                        check !==0 && <ul className="md:flex-col md:min-w-full flex flex-col list-none md:mb-4 cursor-pointer font-bold">
+                        
+                        <ul className="md:flex-col md:min-w-full flex flex-col list-none md:mb-4 cursor-pointer font-bold">
                             <li className="items-center">
                                 <b    
                                     onClick={Logout}
@@ -260,43 +238,10 @@ export default function Sidebar() {
                                     Logout
                                 </b>
                             </li>
+ 
+                            </ul>
+                           
 
-                            {/* <li className="items-center">
-<Link
-className="text-gray-700 hover:text-gray-500 text-xs uppercase py-3 font-bold block"
-to="/auth/register"
->
-<i className="fas fa-clipboard-list text-gray-300 mr-2 text-sm"></i>{" "}
-Register
-</Link>
-</li> */} </ul>
-                    }
-
-{/*                        
-                        <hr className="my-4 md:min-w-full"/> 
-                     
-                        <h6 className="md:min-w-full text-gray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
-                            No Layout Pages
-                        </h6>
-                       
-
-                        <ul className="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
-                            <li className="items-center">
-                                <Link className="text-gray-700 hover:text-gray-500 text-xs uppercase py-3 font-bold block" to="/landing">
-                                    <i className="fas fa-newspaper text-gray-400 mr-2 text-sm"></i>
-                                    {" "}
-                                    Landing Page
-                                </Link>
-                            </li>
-
-                            <li className="items-center">
-                                <Link className="text-gray-700 hover:text-gray-500 text-xs uppercase py-3 font-bold block" to="/profile">
-                                    <i className="fas fa-user-circle text-gray-400 mr-2 text-sm"></i>
-                                  
-                                    Profile Page
-                                </Link>
-                            </li>
-                        </ul> */}
                     </div>
                 </div>
             </nav>

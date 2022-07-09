@@ -8,18 +8,13 @@ import { AiFillGithub } from "react-icons/ai";
 import { loginUser, reset } from '../../features/auth/authSlice';
 import toast from 'react-hot-toast';
 
-
-
-
 const Login = () => {
 
   const { register, handleSubmit, formState: { errors } } = useForm();
   const navigate = useNavigate();
   const dispatch = useDispatch()
-  // const userJson = JSON.parse(localStorage.getItem("user"))
-  // const notify = () => toast('Here is your toast.');
+ 
   const notify_error = (data) => toast.error(`${data}`);
-  // const notify_success = (data) => toast.success(`${data}`);
   
   const { user, isError, isSuccess, message,isLoading } = useSelector(
       (state) => state.auth
@@ -35,14 +30,15 @@ const Login = () => {
         } else if(message.error){
           notify_error(message.error)
         }else{
-          notify_error('Server Error')
+          notify_error(message.message)
+          // console.log(message.message)
         }
       
       // console.log(Array.isArray(message))
       }
 
-      if(isSuccess || user ){
-        // navigate('/admin/dashboard')
+      if(isSuccess && user ){
+        // navigate('/user/dashboard')
         window.location.href="/user/dashboard"
       }
 
