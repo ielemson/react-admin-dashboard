@@ -1,7 +1,7 @@
 /*eslint-disable*/
 import React from "react";
 import {Link,useNavigate} from "react-router-dom";
-import {useSelector, useDispatch} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {logoutUser} from '../../features/auth/authSlice';
 import NotificationDropdown from "../Dropdowns/NotificationDropdown";
 import UserDropdown from "../Dropdowns/UserDropdown";
@@ -16,7 +16,8 @@ export default function Sidebar() {
 
     const Logout = () => {
         dispatch(logoutUser());
-        navigate('/')
+        // localStorage.clear()
+        navigate('/auth/login')
         }
    
     return (
@@ -97,22 +98,6 @@ export default function Sidebar() {
                                 </Link>
                             </li>
 
-                            <li className="items-center">
-                                <Link className={
-                                        "text-xs uppercase py-3 font-bold block " + (
-                                        window.location.href.indexOf("/user/settings") !== -1 ? "text-lightBlue-500 hover:text-lightBlue-600" : "text-gray-700 hover:text-gray-500"
-                                    )
-                                    }
-                                    to="/user/settings">
-                                    <i className={
-                                        "fas fa-tools mr-2 text-sm " + (
-                                        window.location.href.indexOf("/user/settings") !== -1 ? "opacity-75" : "text-gray-300"
-                                    )
-                                    }></i>
-                                    {" "}
-                                    Settings
-                                </Link>
-                            </li>
 
                             <li className="items-center">
                                 <Link className={
@@ -151,7 +136,7 @@ export default function Sidebar() {
 
                         {
                         <ul className="md:flex-col md:min-w-full flex flex-col list-none md:mb-4 cursor-pointer font-bold">
-                          <li className="items-center">
+                          {/* <li className="items-center">
                                 <Link className={
                                         "text-xs uppercase py-3 font-bold block " + (
                                         window.location.href.indexOf("/user/profile") !== -1 ? "text-lightBlue-500 hover:text-lightBlue-600" : "text-gray-700 hover:text-gray-500"
@@ -165,6 +150,24 @@ export default function Sidebar() {
                                     }></i>
                                     {" "}
                                     Profile
+                                </Link>
+                            </li> */}
+
+                            
+                    <li className="items-center">
+                                <Link className={
+                                        "text-xs uppercase py-3 font-bold block " + (
+                                        window.location.href.indexOf("/user/settings") !== -1 ? "text-lightBlue-500 hover:text-lightBlue-600" : "text-gray-700 hover:text-gray-500"
+                                    )
+                                    }
+                                    to="/user/settings">
+                                    <i className={
+                                        "fas fa-tools mr-2 text-sm " + (
+                                        window.location.href.indexOf("/user/settings") !== -1 ? "opacity-75" : "text-gray-300"
+                                    )
+                                    }></i>
+                                    {" "}
+                                    Settings
                                 </Link>
                             </li>
                         <li className="items-center">

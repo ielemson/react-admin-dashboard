@@ -99,22 +99,21 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         }/>
         {/* Quiz App  Ends*/}
         </Route>
+      {/* Authenticated routes ends here ::::::::::::::::::::::::::::::::::::::::::::*/}
+        {/* <Route path='user/profile' element={<ProtectedRoute><Profile/></ProtectedRoute> }/> */}
+  
 
-        <Route path='user/profile' element={<ProtectedRoute><Profile/></ProtectedRoute> }/>
-        {/* Authenticated routes ends here ::::::::::::::::::::::::::::::::::::::::::::*/}
-      
          <Route path="*" element={<NotFound/>} />
     </Routes>
-    {/* <Toaster 
-     position="top-right"
-     reverseOrder={false}
-    /> */}
-
+   
 <Toaster
         position="top-right"
+        reverseOrder={false}
+        gutter={8}
         toastOptions={{
+          duration: 8000,
           style: {
-            fontSize: '0.7rem',
+            fontSize: '0.8rem',
             fontWeight:'bold'
           },
         }}

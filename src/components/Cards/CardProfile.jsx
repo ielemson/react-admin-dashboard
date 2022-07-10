@@ -2,8 +2,8 @@ import axios from "axios";
 import React from "react";
 import { useSelector } from "react-redux";
 import api from "../../api/api";
-import Img from "../../assets/img/team-2-800x800.jpg"
-
+import Img from "../../assets/img/default.jpg"
+import toast from "react-hot-toast"
 
 export default function CardProfile() {
 
@@ -11,22 +11,8 @@ export default function CardProfile() {
   const [picture, setPicture] = React.useState("");
   const {user} = useSelector((state) => state.user)
   const contact = {...user.contactinfo}
-  // const { register, watch, handleSubmit } = useForm();
-
-  // const onSubmit = async() => {
-  // const token = JSON.parse(localStorage.getItem('token'))
-  //   const url = "https://api.cloudinary.com/v1_1/softCore/image/upload"
-  //   const data = new FormData();
-  //   data.append("file", file);
-  //   data.append("upload_preset", "oo68ebne")
-  //   data.append("cloud_name","softCore")
-
-  //   try {
-  //       await axios.post(url,data)
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // };
+  const notify_error = (data) => toast.error(`${data}`);
+  const notify_success = (data) => toast.success(`${data}`);
 
   const uploadImg=(files)=>{
     setFile(files[0]);
@@ -35,37 +21,29 @@ export default function CardProfile() {
     formData.append("file",files[0]);
     formData.append("upload_preset","eldzcoeb")
 
-    // try {
-    // const res =  await axios.post(url,formData)
-
-    // setPicture(res.data.secure_url)  
-    // console.log('img from frontend'+ picture)
-    // } catch (error) {
-    //   console.log(error)
-    // }
-
     axios.post(url,formData).then((res)=>{
-      setPicture(res.data.secure_url)  
+      // setPicture(res.data.secure_url) 
+      // uploadImgPath() 
+
+      const data = {"picture":res.data.secure_url}
+      api.post('/user/upload_img',data).then((res)=>{
+       res.status === 200 && notify_success('picture updated')
+      }).catch((err)=>console.log(err))
+
     }).catch((err)=>console.log(err))
   }
 
-  const uploadImgPath = ()=>{
+  // const uploadImgPath = ()=>{
 
-    // try {
-    //   const res = await api.post('/user/upload_img',picture)  
-    //   console.log(res)
-    // } catch (error) {
-    //   console.log(error)
-    // }
-    const data = {"picture":picture}
-    api.post('/user/upload_img',data).then((res)=>{
-     
-    }).catch((err)=>console.log(err))
-  }
+  //   const data = {"picture":picture}
+  //   api.post('/user/upload_img',data).then((res)=>{
+  //    res.status === 200 && notify_success('picture updated')
+  //   }).catch((err)=>console.log(err))
+  // }
 
-  React.useEffect(()=>{
-    picture && uploadImgPath()
-    },[picture])
+  // React.useEffect(()=>{
+  //   picture && uploadImgPath()
+  //   },[])
   return (
     <>
      {user &&  <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg mt-16">
@@ -75,8 +53,8 @@ export default function CardProfile() {
               <div className="relative">
               
                 <img
-                  alt="..."
-                  src={ file ? URL.createObjectURL(file) : user.picture ? user.picture :Img }
+                  alt="profile picture"
+                  src={ file ? URL.createObjectURL(file) : user.picture !== null ? user.picture :Img }
                   className="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px"
                 />
               
@@ -94,7 +72,6 @@ export default function CardProfile() {
                                     <input type="file" id="file"
                                  
                                   onChange={e => {
-                                    //  setFile(e.target.files[0])
                                     uploadImg(e.target.files)
                                     }}
                                     className="hidden"

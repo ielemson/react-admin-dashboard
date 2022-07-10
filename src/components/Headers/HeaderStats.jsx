@@ -1,17 +1,22 @@
 import React from "react";
-import { useSelector,useDispatch } from "react-redux";
-import { getAllTodos } from "../../features/todo/todoSlice";
+import { useSelector } from "react-redux";
 // components
 
 import CardStats from "../Cards/CardStats";
 
 export default function HeaderStats() {
-  const dispatch = useDispatch();
   const {users} = useSelector((state)=>state.users)
-  const {todos,todoList} = useSelector((state)=>state.todos)
+  const {todos,todoList, isLoading} = useSelector((state)=>state.todos)
 
-  React.useEffect(()=>{dispatch(getAllTodos
-    ())},[])
+ const Loader = ()=>{
+  return ( 
+  <div className="flex space-x-3 p-3">
+  <div className="w-1 h-1 bg-gray-800 rounded-full animate-bounce"></div>
+       <div className="w-1 h-1 bg-gray-800 rounded-full animate-bounce"></div>
+   <div className="w-1 h-1 bg-gray-800 rounded-full animate-bounce"></div>
+</div>
+)
+ }
   return (
     <>
       {/* Header */}
@@ -23,7 +28,7 @@ export default function HeaderStats() {
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
                   statSubtitle="My Todos"
-                  statTitle={todos.length}
+                  statTitle={isLoading ? <Loader/> : todos.length}
                   statArrow="up"
                   statPercent="3.48"
                   statPercentColor="text-emerald-500"
@@ -35,7 +40,7 @@ export default function HeaderStats() {
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
                   statSubtitle="NEW USERS"
-                  statTitle={users.length}
+                  statTitle={isLoading ? <Loader/> : users.length}
                   statArrow="down"
                   statPercent="3.48"
                   statPercentColor="text-red-500"
@@ -47,7 +52,7 @@ export default function HeaderStats() {
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
                   statSubtitle="Todos"
-                  statTitle={todoList.length}
+                  statTitle={isLoading ? <Loader/> : todoList.length}
                   statArrow="down"
                   statPercent="1.10"
                   statPercentColor="text-orange-500"

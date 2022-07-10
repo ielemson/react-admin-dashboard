@@ -23,7 +23,7 @@ const login = async (userData) => {
 const logout = async () => {
  
   const response = await api.get("/logout");
-  if (response.data.logout_status) {
+  if (response.data.status === true) {
     localStorage.clear();
   }
 

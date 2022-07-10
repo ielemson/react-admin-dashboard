@@ -2,9 +2,10 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import {Navigate, Outlet} from 'react-router-dom';
-import { getTodos } from '../features/todo/todoSlice';
+import { getAllTodos, getTodos } from '../features/todo/todoSlice';
 import { authCheck } from '../features/user/authCheckSlice';
 import { getCurUSer } from '../features/user/curUserSlice';
+import { getUser } from '../features/user/userSlice';
 import { getUsers } from '../features/user/usersSlice';
 const ProtectedRoute = ({
     redirectPath = '/',
@@ -16,9 +17,11 @@ const ProtectedRoute = ({
     const dispatch = useDispatch()
     React.useEffect(()=>{
         dispatch(getCurUSer())
+        dispatch(getUser())
         dispatch(getUsers())
         dispatch(getTodos())
         dispatch(authCheck())
+        dispatch(getAllTodos())
     },[])
     if(!token) {
    

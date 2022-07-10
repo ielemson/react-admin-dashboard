@@ -29,7 +29,7 @@ export default function Register() {
         }
         if (isSuccess || user) {
             // navigate('/')
-            window.location.href="/admin/dashboard"
+            window.location.href="/user/dashboard"
         }
 
         dispatch(reset())

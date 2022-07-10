@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import api from "../../../../api/api";
 // import http from "../../api/http";
-import img from "../../../../assets/img/team-2-800x800.jpg"
+import img from "../../../../assets/img/default.jpg"
 
 export default function CardProfile({user}) {
 

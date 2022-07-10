@@ -2,22 +2,27 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import api from "../../api/api";
 import toast from 'react-hot-toast';
+import { getUsers } from "../../features/user/usersSlice";
+import { useDispatch } from "react-redux";
+
 // components
 
  const CreateUser = ()=> {
     const {register, handleSubmit, formState: {
          errors,
-         resetForm,
+         resetField,
         isSubmitting
     }} = useForm();
     const notify_error = (data) => toast.error(`${data}`);
     const notify_success = (data) => toast.success(`${data}`);
-
+    const dispatch = useDispatch()
         const onFormSubmit = async (data) => {
-
+            // console.log(data)
+            // return;
         api.post("user/store",data).then((res)=>{
           notify_success(res.data.message)
-          resetForm()
+        //   resetField()
+        dispatch(getUsers())
         }).catch((err)=>err.response.data.errors.forEach(error => notify_error(error)))
 
     }
@@ -68,15 +73,31 @@ import toast from 'react-hot-toast';
                                         }</span>
                                     </div>
                                 </div>
-                                <div className="w-full  px-4">
+                                <div className="w-full lg:w-6/12 px-4">
                                     <div className="relative w-full mb-3">
-                                        <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                                        <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-fullname">
                                             Full Name
                                         </label>
                                         <input type="text" className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"  {...register('fullname', { required: "Your name is required" } )}/>
                                         <span className=' text-red-500 font-bold text-sm'>
                                             {
                                             errors ?. fullname && errors.fullname.message
+                                        }</span>
+                                    </div>
+                                </div>
+                                <div className="w-full lg:w-6/12 px-4">
+                                    <div className="relative w-full mb-3">
+                                        <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-status">
+                                            Account Status
+                                        </label>
+                                        <select  className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"  {...register('status', { required: "Status is required" } )}>
+                                            <option value="">Set Status</option>
+                                            <option value={1}>set active</option>
+                                            <option value={0}>set inactive</option>
+                                        </select>
+                                        <span className=' text-red-500 font-bold text-sm'>
+                                            {
+                                            errors ?. status && errors.status.message
                                         }</span>
                                     </div>
                                 </div>

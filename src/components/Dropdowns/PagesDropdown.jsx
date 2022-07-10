@@ -1,18 +1,18 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { createPopper } from "@popperjs/core";
-import {useSelector } from 'react-redux';
-// import { logoutUser, reset } from '../../features/auth/authSlice';
+import {useDispatch} from 'react-redux';
+import { logoutUser } from "../../features/auth/authSlice";
+
 
 const PagesDropdown = () => {
   // dropdown props
   const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
-  // const dispatch = useDispatch();
-  // const navigate = useNavigate();
-  // const { user } = useSelector(
-  //   (state) => state.user
-  // )
-  const {check} = useSelector((state)=>state.check)
+  const dispatch = useDispatch();
+  
+  // const {check} = useSelector((state)=>state.check)
+  const token = JSON.parse(localStorage.getItem('token'))
+  const navigate = useNavigate()
   const btnDropdownRef = React.createRef();
   const popoverDropdownRef = React.createRef();
   const openDropdownPopover = () => {
@@ -27,8 +27,10 @@ const PagesDropdown = () => {
 
   const Logout = ()=>{
     dispatch(logoutUser());
-    dispatch(reset());
+    localStorage.clear()
     navigate('/auth/login')
+    
+    // window.location.href="/auth/login"
   }
   return (
     <>
@@ -52,7 +54,7 @@ const PagesDropdown = () => {
         }
       >
       {
-      check !== false  && <>
+      token !== null  && <>
         <span
           className={
             "text-sm pt-2 pb-0 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-400"
@@ -80,7 +82,7 @@ const PagesDropdown = () => {
         
           </>}
 
-       {check === false && 
+       {token === null && 
        <>
           <div className="h-0 mx-4 my-2 border border-solid border-blueGray-100" />
           <span
@@ -110,17 +112,17 @@ const PagesDropdown = () => {
        }
       
        {
-         check !== false  &&  
+         token !== null  &&  
         <>
-         <div className="h-0 mx-4 my-2 border border-solid border-blueGray-100" />
+        <div className="border border-solid border-blueGray-100" />
          <button
          onClick={Logout}
          type="button"
          className={
-           "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+           "text-sm py-2 px-4 font-normal  w-full bg-red-500 text-white "
          }
        >
-         <i className="fas fa-arrow-alt-circle-right"></i>  Logout
+         <i className="fas fa-arrow-alt-circle-right text-white"></i>  Logout
        </button>
         </>
        }

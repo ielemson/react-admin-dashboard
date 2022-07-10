@@ -20,7 +20,6 @@ const getUser = async()=>{
     
     const url = "/user/"+id;
     const res = await api.get(url)
-
     setUser(res.data)
   } catch (error) {
     console.log(error)

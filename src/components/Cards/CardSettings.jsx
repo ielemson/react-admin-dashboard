@@ -27,9 +27,9 @@ const CreateUser = ()=> {
 
     }
     // get user
-    React.useEffect(() => {
-        dispatch(getUser())
-    }, [getUser])
+    // React.useEffect(() => {
+    //     dispatch(getUser())
+    // }, [])
 
     return (
         <> {

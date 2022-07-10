@@ -1,13 +1,15 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 import api from "../../../../api/api";
+import { getUsers } from "../../../../features/user/usersSlice";
 
 
 export default function CardSettings({user,getUser}) {
   // const dispatch  = useDispatch()
   const { register, setValue,handleSubmit, formState: { errors } } = useForm();
   const contact = {...user.contactinfo}
-
+  const dispatch = useDispatch()
 
   const onFormSubmit = async(data) =>{
 
@@ -15,6 +17,7 @@ export default function CardSettings({user,getUser}) {
         const url = "/user/update/"+user.id;
         await api.post(url,data);
         getUser()
+        dispatch(getUsers())
     } catch (error) {
       console.log(error)
     }
@@ -48,8 +51,8 @@ export default function CardSettings({user,getUser}) {
         :
         (
         <>
-        <input class="form-check-input appearance-none rounded-full p-1 mr-2 talign-top bg-white focus:outline-none cursor-pointer shadow-sm" type="checkbox" role="switch" />
-        <label class="form-check-label inline-block text-gray-800" for="user status"><b className="text-red-500">active</b></label></>)
+        <input class="form-check-input appearance-none rounded-full p-1 mr-2 talign-top bg-white focus:outline-none cursor-pointer shadow-sm" type="checkbox" role="switch" checked />
+        <label class="form-check-label inline-block text-gray-800" for="user status"><b className="text-red-500">inactive</b></label></>)
       }
         </div>
         </div>
@@ -98,7 +101,7 @@ export default function CardSettings({user,getUser}) {
                      <span className=' text-red-500 font-bold text-sm'>{errors?.email && errors.email.message}</span>
               </div>
             </div>
-            <div className="w-full  px-4">
+            <div className="w-full lg:w-6/12 px-4">
               <div className="relative w-full mb-3">
                 <label
                   className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
@@ -115,21 +118,24 @@ export default function CardSettings({user,getUser}) {
                      <span className=' text-red-500 font-bold text-sm'>{errors?.fullname && errors.fullname.message}</span>
               </div>
             </div>
-            {/* <div className="w-full lg:w-6/12 px-4">
-              <div className="relative w-full mb-3">
-                <label
-                  className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                  htmlFor="grid-password"
-                >
-                  Last Name
+            <div className="w-full lg:w-6/12 px-4">
+            <div className="relative w-full mb-3">
+                <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                    Account Status
                 </label>
-                <input
-                  type="text"
-                  className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                  defaultValue="Jesse"
-                />
+                <select 
+                   {...setValue('status',user.active)}
+                   className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"  {...register('status', { required: "Status is required" } )}>
+                    <option value="">Set Status</option>
+                    <option value={1}>active</option>
+                    <option value={0}>inactive</option>
+                </select>
+                <span className=' text-red-500 font-bold text-sm'>
+                    {
+                    errors ?. fullname && errors.fullname.message
+                }</span>
+            </div>
               </div>
-            </div> */}
           </div>
 
           <hr className="mt-6 border-b-1 border-blueGray-300" />
