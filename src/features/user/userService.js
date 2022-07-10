@@ -37,8 +37,8 @@ const uploadPicture = async (data) => {
 };
 // check if token is valid
 const authCheck = async () => {
-  const token = JSON.parse(localStorage.getItem('token'))
-  token === null ? token= '': token
+  let token = JSON.parse(localStorage.getItem('token'))
+  token === null ? token = '': token
   const url = "/check_token/"+token;
   const response = await api.get(url);
   return response.data.isAuthenticated
