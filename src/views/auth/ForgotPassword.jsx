@@ -89,7 +89,7 @@ const ForgotPassword = () => {
                                     <div className="text-center mt-6">
                                         {
                                         isLoading ? (
-                                            <button className="bg-gray-800 disabled text-white active:bg-gray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150" type="button">
+                                            <button disabled className="bg-gray-800 cursor-wait text-white active:bg-gray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150" type="button">
                                                 <div className="absolute ">
                                                     <div className="w-4 h-4  border-4 border-blue-400 border-dashed rounded-full animate-spin"></div>
                                                 </div>
@@ -97,7 +97,7 @@ const ForgotPassword = () => {
                                             </button>
 
                                         ) : (
-                                            <button className="bg-gray-800 text-white active:bg-gray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150" type="submit">
+                                            <button disabled={isLoading} className="bg-gray-800 text-white active:bg-gray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150" type="submit">
                                                 Reset Password
                                             </button>
                                         )
