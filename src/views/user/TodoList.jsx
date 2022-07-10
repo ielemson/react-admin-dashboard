@@ -1,7 +1,7 @@
 import React,{useEffect} from "react";
 import { useForm } from "react-hook-form";
 import {useSelector,useDispatch} from 'react-redux';
-import TodoCard from "../../components/Cards/TodoCard"
+import TodoCard from "../management/components/Cards/TodoCard"
 import toast from "react-hot-toast";
 import { getTodos} from "../../features/todo/todoSlice";
 import api from "../../api/api";

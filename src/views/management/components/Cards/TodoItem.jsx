@@ -1,7 +1,7 @@
 import React from "react";
 // import PropTypes from "prop-types";
-import api from "../../api/api";
-import {getTodos} from "../../features/todo/todoSlice";
+import api from "../../../../api/api";
+import {getTodos} from "../../../../features/todo/todoSlice";
 import {useDispatch} from "react-redux";
 import toast from "react-hot-toast";
 import moment from "moment";
@@ -72,7 +72,7 @@ const  TodoItem = ({
                             } </h5>
                             <p className={
                                 `${
-                                    statStatus === 1 ? 'line-through font-bold text-sm text-gray-500 italic uppercase' : 'font-bold text-sm text-blueGray-700 uppercase'
+                                    statStatus == 1 ? 'line-through font-bold text-sm text-gray-500 italic uppercase' : 'font-bold text-sm text-blueGray-700 uppercase'
                                 }`
                             }>
                                 {statDescription} </p>
@@ -90,7 +90,7 @@ const  TodoItem = ({
                                     {/* <button type="button" className=" inline-block px-2 py-1 bg-red-400 text-white font-medium text-xs leading-tight uppercase hover:bg-red-600 focus:bg-red-700 focus:outline-none focus:ring-0 active:bg-red-800 transition duration-150 ease-in-out">
                                         <i className='far fa-window-close text-xl'></i>
                                     </button> */}
-                                    {statStatus === 1 ? (<button onClick={
+                                    {statStatus == 1 ? (<button onClick={
                                             () => undoTodo(todoID)
                                         }
                                         type="button"
@@ -110,7 +110,7 @@ const  TodoItem = ({
                         <span className={
                             statPercentColor + " mr-2"
                         }>
-                            <i>{statStatus === 1 ? 'completed' : 'uncompleted'}</i>
+                            <i>{statStatus == 1 ? 'completed' : 'uncompleted'}</i>
                             {" "} </span>
                         <span className="whitespace-nowrap">
                             {

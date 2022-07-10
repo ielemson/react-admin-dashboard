@@ -7,7 +7,6 @@ import {
 } from "react-router-dom";
 import './assets/styles/index.css'
 import App from './App'
-// import { HomeComponent } from './components';
 import {Provider} from "react-redux";
 import store from "./features/store"
 import "@fortawesome/fontawesome-free/css/all.min.css";
@@ -25,13 +24,16 @@ import AdminApp from './views/admin/AdminApp';
 import Landing from './views/Landing';
 import NotFound from './views/NotFound';
 import User from "./views/management/User"
-import Profile from "./views/Profile"
+// import Profile from "./views/Profile"
 import ProtectedRoute from './utils/ProtectedRoute ';
 import CreateUser from './views/management/CreateUser';
 import TodoList from './views/user/TodoList';
 import QuizSettings from "./views/Quiz/QuizSettings"
 import FinalQuiz from "./views/Quiz/FinalScreen";
 import Questions from "./views/Quiz/Questions";
+
+
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
 

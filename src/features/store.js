@@ -7,7 +7,7 @@ import authCheckReducer from "./user/authCheckSlice";
 import curUserReducer from "./user/curUserSlice"
 import todoReducer from "./todo/todoSlice";
 
-
+// configure store for central state access
 const store = configureStore({
     reducer:{
         products:productReducer,

@@ -187,7 +187,7 @@ export default function CardTable({ color }) {
                 </th>
                 
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                 {role === "admin" ? user.email : '*****'}
+                 {role == "admin" ? user.email : '*****'}
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                   {user.username}
@@ -197,7 +197,7 @@ export default function CardTable({ color }) {
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                   {
-                    user.active === 1 ? (<>
+                    user.active == 1 ? (<>
                     <i className="fas fa-circle text-green-500 mr-2"></i> active</> ):(<><i className="fas fa-circle text-orange-500 mr-2"></i> suspended </> )
                   }
                 </td>
@@ -207,10 +207,10 @@ export default function CardTable({ color }) {
                 </td>
                 
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                {role ==="admin" ? (
+                {role =="admin" ? (
                 <>
                   {
-                    user.role === "admin" ? (<button disabled  className="fa fa-trash text-red-600 cursor-not-allowed"></button>):(<i className="fa fa-trash text-red-600 text-md cursor-pointer" onClick={()=>deleteUser(user.id)}></i>)
+                    user.role == "admin" ? (<button disabled  className="fa fa-trash text-red-600 cursor-not-allowed"></button>):(<i className="fa fa-trash text-red-600 text-md cursor-pointer" onClick={()=>deleteUser(user.id)}></i>)
                   }
                 <Link to={'/admin/user/'+user.id}><i className="fa fa-edit text-green-500 text-md cursor-pointer ml-2"></i></Link>
                 </>):(<button type="button" class="inline-block px-2 py-1 cursor-not-allowed bg-red-600 text-white font-xs font-bold text-xs leading-tight uppercase rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out">Restricted</button>)}

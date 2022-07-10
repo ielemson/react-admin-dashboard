@@ -1,9 +1,9 @@
 import React from "react";
-import TodoItem from "../Cards/TodoItem";
+import TodoItem from "./TodoItem";
 
 export default function HeaderStats({todos,filterTodo}) {
  const [todoLists, setTodoLists] = React.useState([])
-
+console.log(todoLists)
  const filterTodoHandler = ()=>{
       switch (filterTodo) {
         case 'completed':
@@ -38,7 +38,7 @@ export default function HeaderStats({todos,filterTodo}) {
                     <div className="w-full lg:w-6/12 p-3 px-4" key={key}>
                     <TodoItem
                       // statTitle={todo.todo}
-                      statPercentColor={todo.completed === 1 ? "font-bold text-emerald-500" : "font-bold text-red-500"}
+                      statPercentColor={todo.completed == 1 ? "font-bold text-emerald-500" : "font-bold text-red-500"}
                       statDescription={todo.todo}
                       statStatus={todo.completed}
                       todoID = {todo.id}

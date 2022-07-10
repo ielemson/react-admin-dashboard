@@ -44,7 +44,7 @@ export default function CardSettings({user,getUser}) {
           <div class="fiex justify-center">
         <div class="form-check form-switch">
       {
-        user.active === 1 ?
+        user.active == 1 ?
          (
          <>  <input class="form-check-input appearance-none rounded-full p-1 mr-2 talign-top bg-white focus:outline-none cursor-pointer shadow-sm" type="checkbox" role="switch" checked />
           <label class="form-check-label inline-block text-gray-800" for="user status"><b className="text-green-500">active</b></label></>)
