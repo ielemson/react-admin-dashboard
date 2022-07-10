@@ -6,7 +6,7 @@ import {useNavigate, useParams, Link} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import {updatePassword, reset} from '../../features/auth/authSlice';
 import axios from 'axios';
-const api = "http://localhost:8000/api";
+const api = "https://api.oxiltravel.com/api";
 const endpoint = "confirm-reset-token"
 // const update_endpoint = "/update-password"
 
