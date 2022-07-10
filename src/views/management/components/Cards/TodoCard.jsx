@@ -7,10 +7,10 @@ console.log(todoLists)
  const filterTodoHandler = ()=>{
       switch (filterTodo) {
         case 'completed':
-          setTodoLists(todos.filter(todo=>todo.completed === 1))
+          setTodoLists(todos.filter(todo=>todo.completed == 1))
           break;
         case 'incomplete':
-          setTodoLists(todos.filter(todo=>todo.completed === 0))
+          setTodoLists(todos.filter(todo=>todo.completed == 0))
           break;
         default:
           setTodoLists(todos)
