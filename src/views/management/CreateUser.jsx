@@ -10,7 +10,6 @@ import { useDispatch } from "react-redux";
  const CreateUser = ()=> {
     const {register, handleSubmit, formState: {
          errors,
-         resetField,
         isSubmitting
     }} = useForm();
     const notify_error = (data) => toast.error(`${data}`);

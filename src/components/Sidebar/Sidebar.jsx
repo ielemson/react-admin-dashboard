@@ -12,7 +12,7 @@ export default function Sidebar() {
     const [collapseShow, setCollapseShow] = React.useState("hidden");
     const dispatch = useDispatch();
     const navigate = useNavigate()
-
+    const role = JSON.parse(localStorage.getItem('role'))
 
     const Logout = () => {
         dispatch(logoutUser());
@@ -115,6 +115,47 @@ export default function Sidebar() {
                                     Users
                                 </Link>
                             </li>
+                            {
+                                    role == "admin" &&   
+                                    
+                                    <li className="items-center">
+                                    <Link className={
+                                            "text-xs uppercase py-3 font-bold block " + (
+                                            window.location.href.indexOf("/admin/visitors") !== -1 ? "text-lightBlue-500 hover:text-lightBlue-600" : "text-gray-700 hover:text-gray-500"
+                                        )
+                                        }
+                                        to="/admin/visitors">
+                                        <i className={
+                                            "fas fa-users mr-2 text-sm " + (
+                                            window.location.href.indexOf("/admin/visitors") !== -1 ? "opacity-75" : "text-gray-300"
+                                        )
+                                        }></i>
+                                        {" "}
+                                        Visitors
+                                    </Link>
+                                </li>
+                            }
+
+                            {
+                                    role == "admin" &&   
+                                    
+                                    <li className="items-center">
+                                    <Link className={
+                                            "text-xs uppercase py-3 font-bold block " + (
+                                            window.location.href.indexOf("/admin/roles") !== -1 ? "text-lightBlue-500 hover:text-lightBlue-600" : "text-gray-700 hover:text-gray-500"
+                                        )
+                                        }
+                                        to="/admin/roles">
+                                        <i className={
+                                            "fas fa-users mr-2 text-sm " + (
+                                            window.location.href.indexOf("/admin/roles") !== -1 ? "opacity-75" : "text-gray-300"
+                                        )
+                                        }></i>
+                                        {" "}
+                                        Roles/Permissions
+                                    </Link>
+                                </li>
+                            }
 
                                {/*
                                Animate loader

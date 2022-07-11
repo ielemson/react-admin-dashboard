@@ -7,7 +7,8 @@ import CardStats from "../Cards/CardStats";
 export default function HeaderStats() {
   const {users} = useSelector((state)=>state.users)
   const {todos,todoList, isLoading} = useSelector((state)=>state.todos)
-
+  const { visitors}  = useSelector((state)=>state.visitors)
+  console.log(visitors)
  const Loader = ()=>{
   return ( 
   <div className="flex space-x-3 p-3">
@@ -63,13 +64,13 @@ export default function HeaderStats() {
               </div>
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
-                  statSubtitle="PERFORMANCE"
-                  statTitle="49,65%"
+                  statSubtitle="Visitors"
+                  statTitle={isLoading ? <Loader/> : visitors.length}
                   statArrow="up"
                   statPercent="12"
                   statPercentColor="text-emerald-500"
                   statDescripiron="Since last month"
-                  statIconName="fas fa-percent"
+                  statIconName="fas fa-users"
                   statIconColor="bg-lightBlue-500"
                 />
               </div>

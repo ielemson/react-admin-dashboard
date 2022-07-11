@@ -1,23 +1,41 @@
-import React from "react";
+import React,{useState} from "react";
 import { Link } from "react-router-dom";
-// import img from "../assets/img/team-1-800x800.jpg"
-// import img1 from "../assets/img/team-2-800x800.jpg"
-// import img2 from "../assets/img/team-3-800x800.jpg"
-// import img3 from "../assets/img/team-4-470x470.png"
-// components
-// useSelector
+import axios from "axios";
 import Navbar from "../components/Navbars/AuthNavbar";
 import Footer from "../components/Footers/Footer";
-import { authCheck } from "../features/user/authCheckSlice";
+// import { authCheck } from "../features/user/authCheckSlice";
 import { useSelector,useDispatch } from "react-redux";
-
+import apiClient from "../api/apiClient"
 
 export default function Landing() {
-const dispatch = useDispatch();
-const {check} = useSelector((state)=>state.check)
-console.log(check)
+// const dispatch = useDispatch();
+// const {check} = useSelector((state)=>state.check)
+
+//creating IP state
+//  const [location, setLocation] = useState('');
+
+ //creating function to load ip address from the API
+ const getData = () => {
+   axios.get('https://geolocation-db.com/json/').then((res)=>store_location(res.data)).catch((err)=>console.log(err))
+ }
+
+ const store_location = (data)=>{
+
+  const formData = new FormData();
+  formData.append("ipv4", data.IPv4);
+  formData.append("city", data.city);
+  formData.append("country_code", data.country_code);
+  formData.append("country_name", data.country_name);
+  formData.append("latitude", data.latitude);
+  formData.append("longitude", data.longitude);
+  formData.append("state", data.state);
+
+  apiClient.post('/store_location',formData).then((res)=>console.log(res)).catch((Err)=>console.log(Err))
+ }
+
 React.useEffect(()=>{
-  dispatch(authCheck())
+  getData()
+  // dispatch(authCheck())
 },[])
   return (
     <>

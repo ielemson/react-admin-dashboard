@@ -6,7 +6,7 @@ import usersReducer from "./user/usersSlice";
 import authCheckReducer from "./user/authCheckSlice";
 import curUserReducer from "./user/curUserSlice"
 import todoReducer from "./todo/todoSlice";
-
+import visitorsReducer from "./visitors/visitorsSlice";
 // configure store for central state access
 const store = configureStore({
     reducer:{
@@ -16,7 +16,8 @@ const store = configureStore({
         user:userReducer,
         users:usersReducer,
         check:authCheckReducer,
-        todos:todoReducer
+        todos:todoReducer,
+        visitors:visitorsReducer
     }
 })
 

@@ -31,7 +31,7 @@ import TodoList from './views/user/TodoList';
 import QuizSettings from "./views/Quiz/QuizSettings"
 import FinalQuiz from "./views/Quiz/FinalScreen";
 import Questions from "./views/Quiz/Questions";
-
+import Visitors from "./views/visitors/Visitors"
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -100,6 +100,12 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <ProtectedRoute><QuizSettings/></ProtectedRoute>
         }/>
         {/* Quiz App  Ends*/}
+
+        {/* Visitors Route starts :::::::::::: */}
+        <Route path='/admin/visitors' element={
+          <ProtectedRoute><Visitors/></ProtectedRoute>
+        }/>
+        {/* Visitors Route ends :::::::::::::: */}
         </Route>
       {/* Authenticated routes ends here ::::::::::::::::::::::::::::::::::::::::::::*/}
         {/* <Route path='user/profile' element={<ProtectedRoute><Profile/></ProtectedRoute> }/> */}

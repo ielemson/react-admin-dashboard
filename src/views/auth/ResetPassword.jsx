@@ -31,7 +31,7 @@ const ResetPassword = () => {
 
         axios.get(`${api}/${endpoint}/${token}`).then(response => {
             setTokenStatus(response.data.token_status)
-            console.log(tokenStatus)
+            // console.log(tokenStatus)
             setEmail(response.data.useremail)
         }).catch(error => {
 

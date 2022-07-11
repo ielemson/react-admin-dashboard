@@ -7,6 +7,8 @@ import { authCheck } from '../features/user/authCheckSlice';
 import { getCurUSer } from '../features/user/curUserSlice';
 import { getUser } from '../features/user/userSlice';
 import { getUsers } from '../features/user/usersSlice';
+import { getAllVisitors } from '../features/visitors/visitorsSlice';
+
 const ProtectedRoute = ({
     redirectPath = '/',
     children
@@ -22,6 +24,7 @@ const ProtectedRoute = ({
         dispatch(getTodos())
         dispatch(authCheck())
         dispatch(getAllTodos())
+        dispatch(getAllVisitors())
     },[])
     if(!token) {
    
