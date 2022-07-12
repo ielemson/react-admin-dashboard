@@ -32,6 +32,7 @@ import QuizSettings from "./views/Quiz/QuizSettings"
 import FinalQuiz from "./views/Quiz/FinalScreen";
 import Questions from "./views/Quiz/Questions";
 import Visitors from "./views/visitors/Visitors"
+import LanguageTrans from './views/user/LanguageTrans';
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -101,11 +102,20 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         }/>
         {/* Quiz App  Ends*/}
 
+
+        {/* Language Translator Route starts :::::::::::: */}
+        <Route path='/user/langugage/translate' element={
+          <ProtectedRoute><LanguageTrans/></ProtectedRoute>
+        }/>
+        {/* Language Translator Route ends :::::::::::::: */}
+
         {/* Visitors Route starts :::::::::::: */}
         <Route path='/admin/visitors' element={
           <ProtectedRoute><Visitors/></ProtectedRoute>
         }/>
         {/* Visitors Route ends :::::::::::::: */}
+
+    
         </Route>
       {/* Authenticated routes ends here ::::::::::::::::::::::::::::::::::::::::::::*/}
         {/* <Route path='user/profile' element={<ProtectedRoute><Profile/></ProtectedRoute> }/> */}

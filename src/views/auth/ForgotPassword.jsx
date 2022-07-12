@@ -4,6 +4,7 @@ import toast from 'react-hot-toast';
 import {useNavigate} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import {resetPassword, reset} from '../../features/auth/authSlice';
+import { Helmet } from 'react-helmet';
 // const endpoint = "/reset-password"
 
 
@@ -52,7 +53,11 @@ const ForgotPassword = () => {
 
     return (
         <>
-
+                <Helmet>
+                <meta charSet="utf-8" />
+                <title>Hash360 :: Forgot Password</title>
+                <link rel="canonical" href="https://golden-marshmallow-ad815b.netlify.app/reset-password/219b9557" />
+            </Helmet>
             <div className=" mx-auto px-4 h-full p-[7.6rem]">
                 <div className="flex content-center items-center justify-center h-full">
                     <div className="w-full lg:w-4/12 px-4">

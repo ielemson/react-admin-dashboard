@@ -217,7 +217,7 @@ export default function Sidebar() {
                                         window.location.href.indexOf('user/todo') !== -1 ? "text-lightBlue-500 hover:text-lightBlue-600" : "text-gray-700 hover:text-gray-500"
                                     )
                                     }
-                                    to={`/user/todo`}>
+                                    to="/user/todo">
                                     <i className={
                                         "fas fa-tasks mr-2 text-sm " + (
                                         window.location.href.indexOf(`user/todo`) !== -1 ? "opacity-75" : "text-gray-300"
@@ -230,17 +230,17 @@ export default function Sidebar() {
                             <li className="items-center">
                                 <Link className={
                                         "text-xs uppercase py-3 font-bold block " + (
-                                        window.location.href.indexOf('user/file') !== -1 ? "text-lightBlue-500 hover:text-lightBlue-600" : "text-gray-700 hover:text-gray-500"
+                                        window.location.href.indexOf('user/langugage/translate') !== -1 ? "text-lightBlue-500 hover:text-lightBlue-600" : "text-gray-700 hover:text-gray-500"
                                     )
                                     }
-                                    to={`/user/todo`}>
+                                    to="/user/langugage/translate">
                                     <i className={
                                         "fas fa-tasks mr-2 text-sm " + (
-                                        window.location.href.indexOf(`user/file`) !== -1 ? "opacity-75" : "text-gray-300"
+                                        window.location.href.indexOf("user/langugage/translate") !== -1 ? "opacity-75" : "text-gray-300"
                                     )
                                     }></i>
                                     {" "}
-                                    Send File
+                                Language Translator
                                 </Link>
                             </li>
                             <li className="items-center">

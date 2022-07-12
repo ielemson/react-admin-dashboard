@@ -8,7 +8,7 @@ export default function HeaderStats() {
   const {users} = useSelector((state)=>state.users)
   const {todos,todoList, isLoading} = useSelector((state)=>state.todos)
   const { visitors}  = useSelector((state)=>state.visitors)
-  console.log(visitors)
+  
  const Loader = ()=>{
   return ( 
   <div className="flex space-x-3 p-3">

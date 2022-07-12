@@ -1,10 +1,11 @@
 import React, {useState} from 'react'
 import {useForm} from "react-hook-form";
 import toast, {Toaster} from 'react-hot-toast';
-import {AiOutlineWarning} from "react-icons/ai";
-import {useNavigate, useParams, Link} from 'react-router-dom';
+// import {AiOutlineWarning} from "react-icons/ai";
+import {useNavigate, useParams} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
-import {updatePassword, reset} from '../../features/auth/authSlice';
+import {updatePassword} from '../../features/auth/authSlice';
+import {Helmet} from "react-helmet"
 import axios from 'axios';
 import CardAlert from '../../components/Cards/CardAlert';
 const api = "https://api.oxiltravel.com/api";
@@ -90,6 +91,11 @@ const ResetPassword = () => {
 
     return ( 
     <>
+    <Helmet>
+                <meta charSet="utf-8" />
+                <title>Hash360 :: Reset Password</title>
+                <link rel="canonical" href="https://golden-marshmallow-ad815b.netlify.app/reset-password/219b9557" />
+            </Helmet>
       {
         tokenStatus === true ? (
         

@@ -7,6 +7,7 @@ import { FcGoogle } from "react-icons/fc";
 import { AiFillGithub } from "react-icons/ai";
 import { loginUser, reset } from '../../features/auth/authSlice';
 import toast from 'react-hot-toast';
+import { Helmet } from "react-helmet";
 
 const Login = () => {
 
@@ -54,6 +55,11 @@ const Login = () => {
 
   return (
     <>
+    <Helmet>
+                <meta charSet="utf-8" />
+                <title>Hash360 :: Login</title>
+                <link rel="canonical" href="https://golden-marshmallow-ad815b.netlify.app/reset-password/219b9557" />
+            </Helmet>
       <div className="container mx-auto px-4 h-full">
         <div className="flex content-center items-center justify-center h-full">
           <div className="w-full lg:w-4/12 px-4">
